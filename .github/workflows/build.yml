@@ -51,7 +51,7 @@ jobs:
         with:
           keep_latest: 1
           delete_pre_release: true
-          repo_token: ${{ secrets.token1 }}
+          GITHUB_TOKEN: ${{ secrets.token1 }}
       - name: Create or Update pre-release
         if: github.event_name == 'push'
         uses: softprops/action-gh-release@v1

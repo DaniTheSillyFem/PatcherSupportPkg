@@ -49,7 +49,7 @@ jobs:
         if: github.event_name == 'push'
         uses: dev-drprasad/delete-older-releases@v0.3.4
         with:
-          keep_latest: 1
+          keep_latest: 0
           delete_prerelease_only: true
           repo_token: ${{ github.token }}
         env:

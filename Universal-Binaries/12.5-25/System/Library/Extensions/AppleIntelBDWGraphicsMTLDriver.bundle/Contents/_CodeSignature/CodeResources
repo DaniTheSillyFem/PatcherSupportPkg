@@ -279,10 +279,19 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			LY6m5c/Bqsnk6GJe9xKePYxqxNE=
+			gdUrNc4+0DKTeZXbm4izT/OW/P4=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"2d8ea6e5cfc1aac9e4e8625ef7129e3d8c6ac4d1"</string>
+			<string>cdhash H"81d52b35ce3ed032937995db9b88b34ff396fcfe"</string>
+		</dict>
+		<key>MacOS/impostor.dylib</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			SpQ0s9H5cO/r8luhUicrXXOK2r4=
+			</data>
+			<key>requirement</key>
+			<string>identifier impostor and certificate root = H"c290d2bff240f4e990f7ac9b632f568d0e2a82f5"</string>
 		</dict>
 		<key>MacOS/libigdmd.dylib</key>
 		<dict>

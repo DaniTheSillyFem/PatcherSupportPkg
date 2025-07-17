@@ -16,12 +16,16 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v3
+      - uses: apple-actions/import-codesign-certs@8f3fb608891dd2244cdab3d69cd68c0d37a7fe93
         with:
-          fetch-depth: 0  # Needed to get full commit history
+          p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
+          p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
+      - name: Clean, strip, and sign binaries
+        run: python3 ci.py
       - name: Tag folder
         run: touch Universal-Binaries/.signed
       - name: Build DMG
-        run: python3 Generate-DMG.command
+        run: python3 Generate-DMG.command --sign
       - name: Generate Checksums
         run: shasum -a 256 Universal-Binaries.dmg > sha256sum.txt
       - name: Upload Universal Binaries to Artifacts
@@ -51,7 +55,6 @@ jobs:
         with:
           keep_latest: 0
           delete_prerelease_only: true
-          repo_token: ${{ github.token }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create or Update pre-release

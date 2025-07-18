@@ -6,5 +6,5 @@ set -e
 find Universal-Binaries -name .DS_Store -delete || true
 hdiutil create -srcfolder Universal-Binaries tmp.dmg -volname "OpenCore Patcher Resources (Root Patching)" -fs HFS+ -ov -format UDRO -megabytes 4096
 hdiutil convert -format ULMO tmp.dmg -o Universal-Binaries.dmg -passphrase password -encryption -ov
-codesign -s "Apple Development: HONGFEI CHEN (WMQL4824R6)" Universal-Binaries.dmg
+codesign -s "Apple Development: wxcznb@qq.com (636H9J6N4H)" Universal-Binaries.dmg
 rm tmp.dmg

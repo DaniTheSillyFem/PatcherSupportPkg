@@ -20,10 +20,6 @@ jobs:
         with:
           p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
           p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
-      - name: Clean, strip, and sign binaries
-        run: python3 ci.py
-      - name: Tag folder
-        run: touch Universal-Binaries/.signed
       - name: Build DMG
         run: python3 Generate-DMG.command --sign
       - name: Generate Checksums

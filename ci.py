@@ -10,7 +10,7 @@ from pathlib import Path
 
 # Configurable options
 
-IDENTITY = "Apple Development: wxcznb@qq.com (636H9J6N4H)"
+IDENTITY = "Laobamac Code Signing Certificate"
 TARGET_DIR = Path("Universal-Binaries")
 UNUSED = [
     # Mojave and Catalina non-Metal Patches

@@ -141,6 +141,11 @@ def signing_sanity_checks(file: Path) -> tuple[bool, bool]:  # (valid, needs_sig
         # We have pushed a signed binary already to the repo.
         # This means that CI signing cannot handle this binary. Do not resign, use as is.
         return True, False
+    
+    if "Authority=Laobamac Root CA" in binary_details:
+        # We have pushed a signed binary already to the repo.
+        # This means that CI signing cannot handle this binary. Do not resign, use as is.
+        return True, False
 
     if "Authority=Apple Root CA" in binary_details:
         # File is signed by Apple, and we have already checked that it is valid

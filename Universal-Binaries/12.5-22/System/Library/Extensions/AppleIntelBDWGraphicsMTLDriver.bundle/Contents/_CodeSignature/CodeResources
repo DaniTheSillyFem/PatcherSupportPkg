@@ -275,6 +275,15 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>MacOS/AppleIntelBDWGraphicsMTLDriver_real</key>
+		<dict>
+			<key>cdhash</key>
+			<data>
+			LY6m5c/Bqsnk6GJe9xKePYxqxNE=
+			</data>
+			<key>requirement</key>
+			<string>cdhash H"2d8ea6e5cfc1aac9e4e8625ef7129e3d8c6ac4d1"</string>
+		</dict>
 		<key>MacOS/impostor.dylib</key>
 		<dict>
 			<key>cdhash</key>

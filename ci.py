@@ -142,7 +142,7 @@ def signing_sanity_checks(file: Path) -> tuple[bool, bool]:  # (valid, needs_sig
         # This means that CI signing cannot handle this binary. Do not resign, use as is.
         return True, False
     
-    if "Authority=Laobamac Root CA" in binary_details:
+    if "Authority=SimpleHac Root CA" in binary_details:
         # We have pushed a signed binary already to the repo.
         # This means that CI signing cannot handle this binary. Do not resign, use as is.
         return True, False

@@ -10,6 +10,9 @@ concurrency:
     cancel-in-progress: true
     group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
 
+permissions:
+  contents: write
+
 jobs:
   build_mojave:
     name: Zip and Upload Binaries

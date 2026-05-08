@@ -1,4 +1,4 @@
-# PatcherSupportPkg Fork
+# PatcherSupportPkg Fork²
 
 Repo dedicated to Apple binaries used for patching macOS to run with legacy hardware.
 

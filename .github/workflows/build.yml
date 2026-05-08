@@ -16,16 +16,10 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v3
-      - uses: apple-actions/import-codesign-certs@8f3fb608891dd2244cdab3d69cd68c0d37a7fe93
-        with:
-          p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
-          p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
-      - name: Clean, strip, and sign binaries
-        run: python3 ci.py
       - name: Tag folder
         run: touch Universal-Binaries/.signed
       - name: Build DMG
-        run: python3 Generate-DMG.command --sign
+        run: python3 Generate-DMG.command
       - name: Generate Checksums
         run: shasum -a 256 Universal-Binaries.dmg > sha256sum.txt
       - name: Upload Universal Binaries to Artifacts
@@ -65,7 +59,7 @@ jobs:
           prerelease: true
           generate_release_notes: false
           tag_name: pre-release-${{ github.sha }}
-          name: Pre-Release NOT STABLE VERSION
+          name: 26.x test binaries, NOT for official use unless using OCCP.
           body: ${{ steps.commit_message.outputs.message }}
       - name: Upload to Release
         if: github.event_name == 'release'

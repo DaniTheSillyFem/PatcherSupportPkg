@@ -18,26 +18,33 @@ jobs:
     name: Zip and Upload Binaries
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
+
       - name: Tag folder
         run: touch Universal-Binaries/.signed
+
       - name: Build DMG
         run: python3 Generate-DMG.command
+
       - name: Generate Checksums
         run: shasum -a 256 Universal-Binaries.dmg > sha256sum.txt
+
       - name: Upload Universal Binaries to Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Universal Binaries
           path: Universal-Binaries.dmg
+
       - name: Upload Checksums to Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sha256sum.txt
           path: sha256sum.txt
+
       - run: |
           mkdir deploy
           mv *.dmg sha256sum.txt deploy/
+
       - name: Get commit message
         id: commit_message
         run: |
@@ -46,24 +53,18 @@ jobs:
           MESSAGE="${MESSAGE//$'\n'/'%0A'}"
           MESSAGE="${MESSAGE//$'\r'/'%0D'}"
           echo "message=$MESSAGE" >> $GITHUB_OUTPUT
-      - name: Delete previous pre-release
+
+      - name: Create or Update release
         if: github.event_name == 'push'
-        uses: dev-drprasad/delete-older-releases@v0.3.4
+        uses: svenstaro/upload-release-action@v2
         with:
-          keep_latest: 0
-          delete_prerelease_only: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create or Update pre-release
-        if: github.event_name == 'push'
-        uses: softprops/action-gh-release@v1
-        with:
-          files: deploy/*
-          prerelease: true
-          generate_release_notes: false
-          tag_name: pre-release-${{ github.sha }}
-          name: 26.x test binaries, NOT for official use unless using OCCP.
+          file: deploy/*
+          file_glob: true
+          overwrite: true
+          tag: 2.1.0
+          release_name: 26.x test binaries, NOT for official use unless using OCCP.
           body: ${{ steps.commit_message.outputs.message }}
+
       - name: Upload to Release
         if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@1beeb572c19a9242f4361f4cee78f8e0d9aec5df
